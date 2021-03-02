@@ -1,14 +1,14 @@
 import React from 'react';
 import { render } from 'react-dom';
 import axios from 'axios';
-// const axios = require("axios"); //Make sure to download the axios npm module before requiring it
+import './index.css'; 
 
 const styles = {
   fontFamily: 'sans-serif',
   textAlign: 'center',
   img: {
-    height: "50em"
-  },
+    height: "30em"
+  }
 };
 
 class App extends React.Component {
@@ -35,7 +35,7 @@ class App extends React.Component {
 
       axios.get(`https://api.kanye.rest`)
       .then(res => {
-        var quotes = res.data.quote.replace(/ /g,"_").split('.').filter(function(el) {return el.length != 0}).join('/');
+        var quotes = res.data.quote.replace(/ /g,"_").split('.').filter(function(el) {return el.length !== 0}).join('/');
         const image_url = 'https://api.memegen.link/images/custom/'+quotes+'.png?background='+this.state.template_url;
         this.setState({
           image_url: image_url,
@@ -54,12 +54,12 @@ class App extends React.Component {
     const { image_url } = this.state;
     return (
       <div style={styles}>
-        <h2> Ye Meme Generator </h2>
+        <h1> Ye Meme Generator </h1>
         <div>
           <img style={styles.img} alt="Euphemism for a new religion" src={image_url}/>
         </div>
         <p>
-          <button onClick={this.getRandomImage}>More Ye</button> 
+          <button className="btn b-1" onClick={this.getRandomImage}>New Ye</button> 
         </p>
       </div>
     );
